@@ -6,6 +6,7 @@ import ContactsPage from './pages/contacts-page';
 import { LoginPage } from './pages/login-page';
 import PrivateRoute from './shared/components/private-route';
 import MyBookingsPage from './pages/my-bookings-page';
+import QuestPage from './pages/quest-page';
 
 export const App = () => (
   <BrowserRouter>
@@ -36,6 +37,7 @@ export const App = () => (
         />
         <Route
           path={`${Paths.QUESTS}/:id`}
+          element={<QuestPage/>}
         />
         <Route
           path={`${Paths.QUESTS}/:id/booking`}

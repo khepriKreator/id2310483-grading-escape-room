@@ -1,12 +1,14 @@
 import { Paths } from '../../api/const';
 import type { QuestPreview } from '../../api/models';
 import {Link} from 'react-router-dom';
+import { PageType } from '../../api/type';
 
-type QuestPreviewProps = {
+type QuestPreviewComponentProps = {
   quest: QuestPreview;
+  pageType?: PageType;
 };
 
-const QuestPreview = ({quest}: QuestPreviewProps) => {
+const QuestPreviewComponent = ({quest, pageType = 'MAIN'}: QuestPreviewComponentProps) => {
   const {
     id,
     title,
@@ -42,9 +44,19 @@ const QuestPreview = ({quest}: QuestPreviewProps) => {
             {level}
           </li>
         </ul>
+        {
+          pageType === 'MY_BOOKINGS'
+          &&
+          <button
+            className="btn btn--accent btn--secondary quest-card__btn"
+            type="button"
+          >
+            Отменить
+          </button>
+        }
       </div>
     </div>
   );
 };
 
-export default QuestPreview;
+export default QuestPreviewComponent;

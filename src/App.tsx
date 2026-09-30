@@ -1,9 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CatalogPage from './pages/catalog-page';
 import Layout from './shared/components/layout';
-import { Paths } from './shared/api/const';
+import { AuthStatus, Paths } from './shared/api/const';
 import ContactsPage from './pages/contacts-page';
 import { LoginPage } from './pages/login-page';
+import PrivateRoute from './shared/components/private-route';
+import MyBookingsPage from './pages/my-bookings-page';
 
 export const App = () => (
   <BrowserRouter>
@@ -22,6 +24,11 @@ export const App = () => (
         />
         <Route
           path={Paths.MY_BOOKINGS}
+          element={
+            <PrivateRoute authStatus={AuthStatus.Auth}>
+              <MyBookingsPage/>
+            </PrivateRoute>
+          }
         />
         <Route
           path={Paths.CONTACTS}

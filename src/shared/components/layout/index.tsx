@@ -5,7 +5,7 @@ import Footer from '../footer';
 
 const LayoutName = () => (
   <>
-    <Header authStatus={AuthStatus.No_Auth} />
+    <Header authStatus={AuthStatus.Auth} />
     <Outlet />
     <Footer />
   </>

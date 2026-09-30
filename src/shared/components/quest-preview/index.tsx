@@ -1,3 +1,4 @@
+import { Paths } from '../../api/const';
 import type { QuestPreview } from '../../api/models';
 import {Link} from 'react-router-dom';
 
@@ -25,7 +26,7 @@ const QuestPreview = ({quest}: QuestPreviewProps) => {
       </div>
       <div className="quest-card__content">
         <div className="quest-card__info-wrapper">
-          <Link className="quest-card__link" to={`/quests/${id}`}>{title}</Link>
+          <Link className="quest-card__link" to={`${Paths.QUESTS}/${id}`}>{title}</Link>
         </div>
         <ul className="tags quest-card__tags">
           <li className="tags__item">

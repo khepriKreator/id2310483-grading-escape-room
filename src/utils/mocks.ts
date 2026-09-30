@@ -22,15 +22,21 @@ export const generateQuest = (): Quest => (
   }
 );
 
-export const generateQuestPreview = ({id, title, previewImg, previewImgWebp, level, type, peopleMinMax}: Quest): QuestPreview => (
+export const generateQuestPreview = (): QuestPreview => (
   {
-    id,
-    title,
-    previewImg,
-    previewImgWebp,
-    level,
-    type,
-    peopleMinMax
+    id: faker.string.uuid(),
+    title: faker.lorem.sentence({
+      min: 1,
+      max: 3
+    }),
+    previewImg: faker.image.url(),
+    previewImgWebp: faker.image.url(),
+    level: faker.lorem.word(),
+    type: faker.lorem.word(),
+    peopleMinMax: [
+      faker.number.int({ min: 1, max: 10 }),
+      faker.number.int({ min: 1, max: 10 }),
+    ],
   }
 );
 

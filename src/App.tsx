@@ -8,6 +8,7 @@ import PrivateRoute from './shared/components/private-route';
 import MyBookingsPage from './pages/my-bookings-page';
 import QuestPage from './pages/quest-page';
 import BookingPage from './pages/booking-page';
+import NotFoundPage from './pages/not-found-page';
 
 export const App = () => (
   <BrowserRouter>
@@ -46,6 +47,7 @@ export const App = () => (
         />
         <Route
           path='*'
+          element={<NotFoundPage/>}
         />
       </Route>
     </Routes>

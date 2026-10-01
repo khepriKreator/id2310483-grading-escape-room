@@ -6,8 +6,9 @@ export enum AuthStatus {
 
 export const Paths = {
   MAIN: '/',
-  LOGIN: '/login',
-  CONTACTS: '/contacts',
-  MY_BOOKINGS: '/my-bookings',
-  QUESTS: '/quest'
+  LOGIN: 'login',
+  CONTACTS: 'contacts',
+  MY_BOOKINGS: 'my-bookings',
+  QUESTS: 'quests',
+  BOOKING: 'booking'
 };

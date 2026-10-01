@@ -1,5 +1,15 @@
-import { Location, Quest, QuestPreview } from '../shared/api/models.ts';
+import { Location, Quest, QuestBooking, QuestPreview, Slot } from '../shared/api/models.ts';
 import { faker } from '@faker-js/faker';
+
+export const generateLocation = (): Location => ({
+  address: faker.location.streetAddress(),
+  coords: [faker.location.latitude(), faker.location.longitude()]
+});
+
+export const generateSlots = (count: number): Slot[] => Array.from({length: count}, () => ({
+  time: faker.lorem.word(5),
+  isAvailable: faker.datatype.boolean()
+}));
 
 export const generateQuest = (): Quest => (
   {
@@ -40,7 +50,11 @@ export const generateQuestPreview = (): QuestPreview => (
   }
 );
 
-export const generateLocation = (): Location => ({
-  address: faker.location.streetAddress(),
-  coords: [faker.location.latitude(), faker.location.longitude()]
+export const generateQuestBooking = (): QuestBooking => ({
+  id: faker.string.uuid(),
+  location: generateLocation(),
+  slots: {
+    today: generateSlots(5),
+    tommorow: generateSlots(7),
+  }
 });

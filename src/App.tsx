@@ -7,6 +7,7 @@ import { LoginPage } from './pages/login-page';
 import PrivateRoute from './shared/components/private-route';
 import MyBookingsPage from './pages/my-bookings-page';
 import QuestPage from './pages/quest-page';
+import BookingPage from './pages/booking-page';
 
 export const App = () => (
   <BrowserRouter>
@@ -40,7 +41,8 @@ export const App = () => (
           element={<QuestPage/>}
         />
         <Route
-          path={`${Paths.QUESTS}/:id/booking`}
+          path={`${Paths.QUESTS}/:id/${Paths.BOOKING}`}
+          element={<BookingPage/>}
         />
         <Route
           path='*'

@@ -54,7 +54,7 @@ const QuestPage = () => {
           </p>
           <Link
             className="btn btn--accent btn--cta quest-page__btn"
-            to={`${Paths.QUESTS}/${quest.id}/booking`}
+            to={Paths.BOOKING}
           >
             Забронировать
           </Link>

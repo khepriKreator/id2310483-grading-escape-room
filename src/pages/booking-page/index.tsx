@@ -1,10 +1,27 @@
-import { generateQuest, generateQuestBooking } from '../../utils/mocks';
+import { useState } from 'react';
+import Map from '../../shared/components/map';
+import { generateQuest, generateQuestBookings } from '../../utils/mocks';
 import BookingInfo from './components/booking-info';
 import BookingTimeOptions from './components/booking-time-options';
+import { QuestBooking } from '../../shared/api/models';
+
+const BOOKINGS_COUNT = 4;
+
+const bookingsInfo = generateQuestBookings(BOOKINGS_COUNT);
+const quest = generateQuest();
 
 const BookingPage = () => {
-  const bookingInfo = generateQuestBooking();
-  const quest = generateQuest();
+  const [selectedPlace, setSelectedPlace] = useState<QuestBooking>(
+    bookingsInfo[0],
+  );
+
+  const onPlaceChange = (id: string) => {
+    const place = bookingsInfo.find((item) => item.id === id);
+
+    if (place) {
+      setSelectedPlace(place);
+    }
+  };
 
   return (
     <main className="page-content decorated-page">
@@ -36,11 +53,15 @@ const BookingPage = () => {
           <div className="booking-map">
             <div className="map">
               <div className="map__container">
-                {/* Map */}
+                <Map
+                  center={bookingsInfo[0].location}
+                  quests={bookingsInfo}
+                  onPlaceChange={onPlaceChange}
+                />
               </div>
             </div>
             <p className="booking-map__address">
-              Вы&nbsp;выбрали: {bookingInfo.location.address}
+              Вы&nbsp;выбрали: {selectedPlace.location.address}
             </p>
           </div>
         </div>
@@ -51,13 +72,16 @@ const BookingPage = () => {
         >
           <fieldset className="booking-form__section">
             <legend className="visually-hidden">Выбор даты и времени</legend>
-            {
-              Object.keys(bookingInfo.slots).map((date) =>
-                <BookingTimeOptions key={date} slots={bookingInfo.slots[date]} title={date} onChange={() => console.log('slot')}/>
-              )
-            }
+            {Object.keys(selectedPlace.slots).map((date) => (
+              <BookingTimeOptions
+                key={date}
+                slots={selectedPlace.slots[date]}
+                title={date}
+                onChange={() => console.log('slot')}
+              />
+            ))}
           </fieldset>
-          <BookingInfo onChange={() => console.log('info')}/>
+          <BookingInfo onChange={() => console.log('info')} />
           <button
             className="btn btn--accent btn--cta booking-form__submit"
             type="submit"

@@ -1,3 +1,6 @@
+import Map from '../../shared/components/map';
+import { ContactsLocation } from '../../shared/api/const';
+
 const ContactsPage = () => (
   <main className="page-content decorated-page">
     <div className="decorated-page__decor" aria-hidden="true">
@@ -57,9 +60,7 @@ const ContactsPage = () => (
           </div>
         </dl>
         <div className="contacts__map">
-          <div className="map">
-            <div className="map__container"></div>
-          </div>
+          <Map center={ContactsLocation} contactsAddress={ContactsLocation} />
         </div>
       </div>
     </div>

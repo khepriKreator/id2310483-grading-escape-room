@@ -53,7 +53,7 @@ export const ThemeFiltersOptions: FiltersOption[] = [
     label: 'Sci-fi',
     icon:  filtersIcons.SciFiIcon()
   },
-];
+] as const;
 
 export const LevelFiltersOptions: FiltersOption[] = [
   {
@@ -72,5 +72,5 @@ export const LevelFiltersOptions: FiltersOption[] = [
     value: LevelFilters.Hard,
     label: 'Сложный'
   }
-];
+] as const;
 

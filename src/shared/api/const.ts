@@ -13,6 +13,20 @@ export const Paths = {
   MY_BOOKINGS: 'my-bookings',
   QUESTS: 'quests',
   BOOKING: 'booking',
+} as const;
+
+export const QuestsLevels = {
+  EASY: 'Легкий',
+  MEDIUM: 'Средний',
+  HARD: 'Сложный',
+} as const;
+
+export const QuestsThemes = {
+  ADVENTURES: 'Приключение',
+  HORRORS: 'Ужасы',
+  MYSTIC: 'Мистика',
+  DETECTIVE: 'Детектив',
+  SCI_FI: 'Sci-Fi',
 };
 
 export const Contacts = {
@@ -21,9 +35,9 @@ export const Contacts = {
   tel: '8 (812) 123-45-67',
   email: 'info@escape-room.ru',
   schedule: ['10:00', '22:00'],
-};
+} as const;
 
 export const ContactsLocation: Location = {
   address: `${Contacts.city}, ${Contacts.address}`,
   coords: [59.968322, 30.317359],
-};
+} as const;

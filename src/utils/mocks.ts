@@ -5,8 +5,14 @@ import {
   QuestPreview,
   Slot,
 } from '../shared/api/models.ts';
-import { ContactsLocation } from '../shared/api/const.ts';
+import { ContactsLocation, QuestsLevels, QuestsThemes } from '../shared/api/const.ts';
 import { faker } from '@faker-js/faker';
+
+export const getRandomLevel = (): typeof QuestsLevels[keyof typeof QuestsLevels] => Object.values(QuestsLevels)[
+  faker.number.int({ min: 0, max: Object.values(QuestsLevels).length - 1 })];
+
+export const getRandomTheme = (): typeof QuestsThemes[keyof typeof QuestsThemes] => Object.values(QuestsThemes)[
+  faker.number.int({ min: 0, max: Object.values(QuestsThemes).length - 1 })];
 
 export const generateLocation = (): Location => ({
   address: faker.location.streetAddress(),
@@ -30,8 +36,8 @@ export const generateQuest = (): Quest => ({
   }),
   previewImg: faker.image.url(),
   previewImgWebp: faker.image.url(),
-  level: faker.lorem.word(),
-  type: faker.lorem.word(),
+  level: getRandomLevel(),
+  type: getRandomTheme(),
   peopleMinMax: [
     faker.number.int({ min: 1, max: 10 }),
     faker.number.int({ min: 1, max: 10 }),
@@ -49,8 +55,8 @@ export const generateQuestPreview = (): QuestPreview => ({
   }),
   previewImg: faker.image.url(),
   previewImgWebp: faker.image.url(),
-  level: faker.lorem.word(),
-  type: faker.lorem.word(),
+  level: getRandomLevel(),
+  type: getRandomTheme(),
   peopleMinMax: [
     faker.number.int({ min: 1, max: 10 }),
     faker.number.int({ min: 1, max: 10 }),

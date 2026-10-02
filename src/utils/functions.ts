@@ -8,11 +8,11 @@ export const filterQuests = (state: Pick<State, SlicesNames.Quests>): QuestPrevi
   let result: QuestPreview[] = [...quests];
 
   if (theme !== ThemeFilters.AllQuests) {
-    result = quests.filter((quest) => quest.type === theme);
+    result = result.filter((quest) => quest.type === theme);
   }
 
   if (level !== LevelFilters.Any) {
-    result = quests.filter((quest) => quest.level === level);
+    result = result.filter((quest) => quest.level === level);
   }
 
   return result;

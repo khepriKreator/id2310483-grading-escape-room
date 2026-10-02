@@ -5,8 +5,22 @@ import {
   QuestPreview,
   Slot,
 } from '../shared/api/models.ts';
-import { ContactsLocation, QuestsLevels, QuestsThemes } from '../shared/api/const.ts';
+import { ContactsLocation } from '../shared/api/const.ts';
 import { faker } from '@faker-js/faker';
+
+export const QuestsLevels = {
+  EASY: 'Легкий',
+  MEDIUM: 'Средний',
+  HARD: 'Сложный',
+} as const;
+
+export const QuestsThemes = {
+  ADVENTURES: 'Приключение',
+  HORRORS: 'Ужасы',
+  MYSTIC: 'Мистика',
+  DETECTIVE: 'Детектив',
+  SCI_FI: 'Sci-Fi',
+};
 
 export const getRandomLevel = (): typeof QuestsLevels[keyof typeof QuestsLevels] => Object.values(QuestsLevels)[
   faker.number.int({ min: 0, max: Object.values(QuestsLevels).length - 1 })];

@@ -28,20 +28,6 @@ export const ApiPaths = {
   LOGOUT: 'logout',
 } as const;
 
-export const QuestsLevels = {
-  EASY: 'Легкий',
-  MEDIUM: 'Средний',
-  HARD: 'Сложный',
-} as const;
-
-export const QuestsThemes = {
-  ADVENTURES: 'Приключение',
-  HORRORS: 'Ужасы',
-  MYSTIC: 'Мистика',
-  DETECTIVE: 'Детектив',
-  SCI_FI: 'Sci-Fi',
-};
-
 export const Contacts = {
   city: 'Санкт-Петербург',
   address: 'Набережная реки Карповка, д 5П',

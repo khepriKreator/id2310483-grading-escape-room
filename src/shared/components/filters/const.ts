@@ -1,19 +1,19 @@
 import { filtersIcons } from './components/icons/index';
 
 export enum ThemeFilters {
-  AllQuests = 'ALL_QUESTS',
-  Adventures = 'ADVENTURES',
-  Horrors = 'HORRORS',
-  Mystic = 'MYSTIC',
-  Detective = 'DETECTIVE',
-  SciFi = 'SCI_FI',
+  AllQuests = 'all_quests',
+  Adventures = 'adventures',
+  Horrors = 'horror',
+  Mystic = 'mystic',
+  Detective = 'detective',
+  SciFi = 'sci-fi',
 }
 
 export enum LevelFilters {
-  Any = 'ANY',
-  Easy = 'EASY',
-  Medium = 'MEDIUM',
-  Hard = 'HARD',
+  Any = 'any',
+  Easy = 'easy',
+  Medium = 'medium',
+  Hard = 'hard',
 }
 
 export type FiltersOption = {

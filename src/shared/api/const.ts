@@ -6,6 +6,12 @@ export enum AuthStatus {
   Unknown = 'Unknown',
 }
 
+export enum SlicesNames {
+  Quests = 'QUESTS',
+  User = 'USER',
+  UserBookings = 'USER_BOOKINGS',
+}
+
 export const Paths = {
   MAIN: '/',
   LOGIN: 'login',
@@ -13,6 +19,13 @@ export const Paths = {
   MY_BOOKINGS: 'my-bookings',
   QUESTS: 'quests',
   BOOKING: 'booking',
+} as const;
+
+export const ApiPaths = {
+  QUEST: 'quest',
+  MY_BOOKINGS: 'reservation',
+  LOGIN: 'login',
+  LOGOUT: 'logout',
 } as const;
 
 export const QuestsLevels = {

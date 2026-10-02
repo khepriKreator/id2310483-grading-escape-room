@@ -42,3 +42,13 @@ export type Slot = {
   time: string;
   isAvailable: boolean;
 };
+
+export type AuthData = {
+  email: string;
+  password: string;
+}
+
+export type UserResponseData = {
+  email: string;
+  token: string;
+}

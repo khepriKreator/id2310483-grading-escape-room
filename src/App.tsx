@@ -59,7 +59,7 @@ export const App = () => {
               </PrivateRoute>
             }
           />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path={Paths.NOT_FOUND} element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

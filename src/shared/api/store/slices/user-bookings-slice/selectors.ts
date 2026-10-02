@@ -4,4 +4,4 @@ import { State } from '../../store-types';
 
 export const getUserBookings = (state: Pick<State, SlicesNames.UserBookings>): UserBooking[] => state[SlicesNames.UserBookings].bookings;
 
-export const getIsFetching = (state: Pick<State, SlicesNames.UserBookings>): boolean => state[SlicesNames.UserBookings].isFetching;
+export const getIsBookingsFetching = (state: Pick<State, SlicesNames.UserBookings>): boolean => state[SlicesNames.UserBookings].isFetching;

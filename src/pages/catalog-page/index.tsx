@@ -1,10 +1,16 @@
 import { useAppSelector } from '../../shared/api/store/hooks';
-import { getFilteredQuests } from '../../shared/api/store/slices/quests-slice/selectors';
+import { getFilteredQuests, getIsQuestsFetching } from '../../shared/api/store/slices/quests-slice/selectors';
 import FiltersList from '../../shared/components/filters';
 import QuestPreviewComponent from '../../shared/components/quest-preview';
+import Spinner from '../../shared/components/spinner';
 
 const CatalogPage = () => {
   const quests = useAppSelector(getFilteredQuests);
+  const isFetching = useAppSelector(getIsQuestsFetching);
+
+  if (isFetching) {
+    return <Spinner/>;
+  }
 
   return (
     <main className="page-content">

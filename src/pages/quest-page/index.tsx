@@ -1,15 +1,25 @@
-import { Link, useParams } from 'react-router-dom';
-import { generateQuest } from '../../utils/mocks';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { AuthStatus, Paths } from '../../shared/api/const';
 import { getAuthStatus } from '../../shared/api/store/slices/user-slice/selectors';
 import { useAppSelector } from '../../shared/api/store/hooks';
+import { useGetQuest } from './hooks/useGetQuest';
+import Spinner from '../../shared/components/spinner';
 
 const QuestPage = () => {
   const {id} = useParams();
+  const navigate = useNavigate();
   const authStatus = useAppSelector(getAuthStatus);
-  const quest = generateQuest();
+  const { quest, isNotFound, isFetching } = useGetQuest(id);
 
-  if (!id) {
+  if (isFetching) {
+    return <Spinner/>;
+  }
+
+  if (isNotFound) {
+    navigate(`/${Paths.NOT_FOUND}`);
+  }
+
+  if (!id || !quest) {
     return;
   }
 
@@ -19,11 +29,10 @@ const QuestPage = () => {
         <picture>
           <source
             type="image/webp"
-            srcSet={`${quest.coverImg} 1x, ${quest.coverImgWebp} 2x`}
+            srcSet={quest.coverImgWebp}
           />
           <img
             src={quest.coverImg}
-            srcSet={`${quest.coverImg} 2x`}
             width="1366"
             height="768"
             alt="превью квеста"

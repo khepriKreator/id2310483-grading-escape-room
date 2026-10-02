@@ -19,6 +19,7 @@ export const Paths = {
   MY_BOOKINGS: 'my-bookings',
   QUESTS: 'quests',
   BOOKING: 'booking',
+  NOT_FOUND: '*',
 } as const;
 
 export const ApiPaths = {

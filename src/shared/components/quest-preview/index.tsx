@@ -22,8 +22,16 @@ const QuestPreviewComponent = ({quest, pageType = 'MAIN'}: QuestPreviewComponent
     <div className="quest-card">
       <div className="quest-card__img">
         <picture>
-          <source type="image/webp" srcSet={`${previewImgWebp}, ${previewImgWebp} 2x}`}/>
-          <img src={previewImg} srcSet={`${previewImg} 2x`} width="344" height="232" alt={`превью для квеста ${title}`}/>
+          <source
+            type="image/webp"
+            srcSet={previewImgWebp}
+          />
+          <img
+            src={previewImg}
+            width="1366"
+            height="768"
+            alt="превью квеста"
+          />
         </picture>
       </div>
       <div className="quest-card__content">

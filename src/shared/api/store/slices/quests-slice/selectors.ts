@@ -22,3 +22,7 @@ export const getLevelFilter = (
 export const getThemeFilter = (
   state: Pick<State, SlicesNames.Quests>,
 ): ThemeFilters => state[SlicesNames.Quests].theme;
+
+export const getIsQuestsFetching = (
+  state: Pick<State, SlicesNames.Quests>,
+): boolean => state[SlicesNames.Quests].isFetching;

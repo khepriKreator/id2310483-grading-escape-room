@@ -3,9 +3,13 @@ import { AuthStatus } from '../../api/const';
 import Header from '../header';
 import Footer from '../footer';
 
-const LayoutName = () => (
+export type LayoutProps = {
+  authStatus: AuthStatus;
+};
+
+const LayoutName = ({authStatus}: LayoutProps) => (
   <>
-    <Header authStatus={AuthStatus.Auth} />
+    <Header authStatus={authStatus} />
     <Outlet />
     <Footer />
   </>

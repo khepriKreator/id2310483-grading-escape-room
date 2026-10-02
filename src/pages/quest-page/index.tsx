@@ -1,13 +1,16 @@
 import { Link, useParams } from 'react-router-dom';
 import { generateQuest } from '../../utils/mocks';
-import { Paths } from '../../shared/api/const';
+import { AuthStatus, Paths } from '../../shared/api/const';
+import { getAuthStatus } from '../../shared/api/store/slices/user-slice/selectors';
+import { useAppSelector } from '../../shared/api/store/hooks';
 
 const QuestPage = () => {
   const {id} = useParams();
+  const authStatus = useAppSelector(getAuthStatus);
   const quest = generateQuest();
 
-  if (id) {
-    quest.id = id;
+  if (!id) {
+    return;
   }
 
   return (
@@ -54,7 +57,7 @@ const QuestPage = () => {
           </p>
           <Link
             className="btn btn--accent btn--cta quest-page__btn"
-            to={Paths.BOOKING}
+            to={authStatus === AuthStatus.Auth ? `/quest/${id}/${Paths.BOOKING}` : `/${Paths.LOGIN}`}
           >
             Забронировать
           </Link>

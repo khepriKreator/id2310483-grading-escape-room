@@ -1,3 +1,4 @@
+import { filterQuests } from '../../../../../utils/functions';
 import {
   LevelFilters,
   ThemeFilters,
@@ -12,7 +13,7 @@ export const getQuests = (
 
 export const getFilteredQuests = (
   state: Pick<State, SlicesNames.Quests>,
-): QuestPreview[] => getFilteredQuests(state);
+): QuestPreview[] => filterQuests(state);
 
 export const getLevelFilter = (
   state: Pick<State, SlicesNames.Quests>,

@@ -1,36 +1,34 @@
-import type { QuestPreview } from '../../shared/api/models';
+import { useAppSelector } from '../../shared/api/store/hooks';
+import { getFilteredQuests } from '../../shared/api/store/slices/quests-slice/selectors';
 import FiltersList from '../../shared/components/filters';
 import QuestPreviewComponent from '../../shared/components/quest-preview';
-import { generateQuestPreview } from '../../utils/mocks';
 
-const questsCount = 20;
-const quests: QuestPreview[] = Array.from(
-  { length: questsCount },
-  generateQuestPreview,
-);
+const CatalogPage = () => {
+  const quests = useAppSelector(getFilteredQuests);
 
-const CatalogPage = () => (
-  <main className="page-content">
-    <div className="container">
-      <div className="page-content__title-wrapper">
-        <h1 className="subtitle page-content__subtitle">
-          квесты в Санкт-Петербурге
-        </h1>
-        <h2 className="title title--size-m page-content__title">
-          Выберите тематику
-        </h2>
+  return (
+    <main className="page-content">
+      <div className="container">
+        <div className="page-content__title-wrapper">
+          <h1 className="subtitle page-content__subtitle">
+            квесты в Санкт-Петербурге
+          </h1>
+          <h2 className="title title--size-m page-content__title">
+            Выберите тематику
+          </h2>
+        </div>
+        <div className="page-content__item">
+          <FiltersList />
+        </div>
+        <h2 className="title visually-hidden">Выберите квест</h2>
+        <div className="cards-grid">
+          {quests.map((quest) => (
+            <QuestPreviewComponent key={quest.id} quest={quest} />
+          ))}
+        </div>
       </div>
-      <div className="page-content__item">
-        <FiltersList />
-      </div>
-      <h2 className="title visually-hidden">Выберите квест</h2>
-      <div className="cards-grid">
-        {quests.map((quest) => (
-          <QuestPreviewComponent key={quest.id} quest={quest} />
-        ))}
-      </div>
-    </div>
-  </main>
-);
+    </main>
+  );
+};
 
 export default CatalogPage;

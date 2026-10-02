@@ -14,12 +14,12 @@ export enum SlicesNames {
 
 export const Paths = {
   MAIN: '/',
-  LOGIN: 'login',
-  CONTACTS: 'contacts',
-  MY_BOOKINGS: 'my-bookings',
-  QUESTS: 'quests',
+  LOGIN: '/login',
+  CONTACTS: '/contacts',
+  MY_BOOKINGS: '/my-bookings',
+  QUESTS: '/quests',
   BOOKING: 'booking',
-  NOT_FOUND: '*',
+  NOT_FOUND: '/*',
 } as const;
 
 export const ApiPaths = {

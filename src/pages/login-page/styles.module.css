@@ -1,0 +1,10 @@
+.errorContainer {
+  position: relative;
+}
+
+.errorText {
+  position:absolute;
+  color: #d11212;
+  font-size: 12px;
+  margin: 0;
+}

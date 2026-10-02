@@ -16,7 +16,7 @@ const QuestPage = () => {
   }
 
   if (isNotFound) {
-    navigate(`/${Paths.NOT_FOUND}`);
+    navigate(Paths.NOT_FOUND);
   }
 
   if (!id || !quest) {
@@ -66,7 +66,7 @@ const QuestPage = () => {
           </p>
           <Link
             className="btn btn--accent btn--cta quest-page__btn"
-            to={authStatus === AuthStatus.Auth ? `/quest/${id}/${Paths.BOOKING}` : `/${Paths.LOGIN}`}
+            to={authStatus === AuthStatus.Auth ? `${Paths.QUESTS}/${id}/${Paths.BOOKING}` : Paths.LOGIN}
           >
             Забронировать
           </Link>

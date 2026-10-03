@@ -1,14 +1,9 @@
-import type { QuestPreview } from '../../shared/api/models';
+import { useAppSelector } from '../../shared/api/store/hooks';
+import { getUserBookings } from '../../shared/api/store/slices/user-bookings-slice/selectors';
 import QuestPreviewComponent from '../../shared/components/quest-preview';
-import { generateQuestPreview } from '../../utils/mocks';
-
-const questsCount = 5;
 
 const MyBookingsPage = () => {
-  const quests: QuestPreview[] = Array.from(
-    { length: questsCount },
-    generateQuestPreview,
-  );
+  const bookings = useAppSelector(getUserBookings);
 
   return (
     <main className="page-content decorated-page">
@@ -34,8 +29,11 @@ const MyBookingsPage = () => {
           </h1>
         </div>
         <div className="cards-grid">
-          {quests.map((quest) => (
-            <QuestPreviewComponent key={quest.id} quest={quest} pageType="MY_BOOKINGS"/>
+          {bookings.map((booking) => (
+            <QuestPreviewComponent
+              key={booking.id}
+              data={{ booking, type: 'booking' }}
+            />
           ))}
         </div>
       </div>

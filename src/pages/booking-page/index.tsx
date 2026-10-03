@@ -10,25 +10,28 @@ import { useAppSelector } from '../../shared/api/store/hooks';
 import { useForm } from 'react-hook-form';
 import { getQuest } from '../../shared/api/store/slices/quest-slice/selectors';
 import styles from './styles.module.css';
+import { createBookingRequestInfo } from '../../utils/functions';
+import { useBooking } from './hooks/useBooking';
 
 export type BookingFormData = {
   date: string;
   contactPerson: string;
   phone: string;
   withChildren: boolean;
-  peopleCount: number;
-  placeId: string;
+  peopleCount: string;
+  userAgreement: boolean;
 };
 
 const BookingPage = () => {
   const { id } = useParams();
   const { bookingInfo, isFetching } = useGetBookingInfo(id);
+  const { handleBooking } = useBooking();
   const quest = useAppSelector(getQuest);
   const [selectedPlace, setSelectedPlace] = useState<QuestBooking | null>(null);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting, isValid },
     reset,
   } = useForm<BookingFormData>({
     mode: 'onBlur',
@@ -55,6 +58,17 @@ const BookingPage = () => {
       setSelectedPlace(place);
     }
   };
+
+  const onSubmit = handleSubmit((data) => {
+    if (!selectedPlace) {
+      return;
+    }
+
+    const requestData = createBookingRequestInfo(data, selectedPlace.id);
+
+    handleBooking(quest.id, requestData);
+    reset();
+  });
 
   return (
     <main className="page-content decorated-page">
@@ -99,8 +113,10 @@ const BookingPage = () => {
         </div>
         <form
           className="booking-form"
-          action="https://echo.htmlacademy.ru/"
-          method="post"
+          onSubmit={(evt) => {
+            evt.preventDefault();
+            void onSubmit();
+          }}
         >
           <fieldset className="booking-form__section">
             <legend className="visually-hidden">Выбор даты и времени</legend>
@@ -122,15 +138,20 @@ const BookingPage = () => {
           <button
             className="btn btn--accent btn--cta booking-form__submit"
             type="submit"
+            disabled={!isValid || isSubmitting}
           >
             Забронировать
           </button>
           <label className="custom-checkbox booking-form__checkbox booking-form__checkbox--agreement">
             <input
               type="checkbox"
-              id="id-order-agreement"
-              name="user-agreement"
-              required
+              id="userAgreement"
+              {...register(
+                'userAgreement',
+                {
+                  required: true,
+                }
+              )}
             />
             <span className="custom-checkbox__icon">
               <svg width="20" height="17" aria-hidden="true">

@@ -1,22 +1,35 @@
 import { Paths } from '../../api/const';
-import type { QuestPreview } from '../../api/models';
+import type { QuestPreview, UserBooking } from '../../api/models';
 import {Link} from 'react-router-dom';
-import { PageType } from '../../api/type';
+import { useAppDispatch } from '../../api/store/hooks';
+import { removeBooking } from '../../api/store/slices/user-bookings-slice/user-booking-slice';
 
 type QuestPreviewComponentProps = {
-  quest: QuestPreview;
-  pageType?: PageType;
+  data: {
+    quest: QuestPreview;
+    type: 'quest';
+  } | {
+    booking: UserBooking;
+    type: 'booking';
+  };
 };
 
-const QuestPreviewComponent = ({quest, pageType = 'MAIN'}: QuestPreviewComponentProps) => {
+const Dates = {
+  today: 'сегодня',
+  tomorrow: 'завтра',
+};
+
+const QuestPreviewComponent = ({data}: QuestPreviewComponentProps) => {
+  const dispatch = useAppDispatch();
+  const bookingInfo = data.type === 'booking' ? data.booking : null;
   const {
     id,
-    title,
     previewImg,
     previewImgWebp,
-    level,
+    title,
     peopleMinMax,
-  } = quest;
+    level,
+  } = data.type === 'booking' ? data.booking.quest : data.quest;
 
   return (
     <div className="quest-card">
@@ -37,13 +50,28 @@ const QuestPreviewComponent = ({quest, pageType = 'MAIN'}: QuestPreviewComponent
       <div className="quest-card__content">
         <div className="quest-card__info-wrapper">
           <Link className="quest-card__link" to={`${Paths.QUESTS}/${id}`}>{title}</Link>
+          {
+            bookingInfo
+              &&
+              <span
+                className="quest-card__info"
+              >
+                [{bookingInfo.date === 'today' ? Dates.today : Dates.tomorrow},&nbsp;{bookingInfo.time}. {bookingInfo.location.address}]
+              </span>
+          }
         </div>
         <ul className="tags quest-card__tags">
           <li className="tags__item">
             <svg width="11" height="14" aria-hidden="true">
               <use xlinkHref="#icon-person"></use>
             </svg>
-            {peopleMinMax[0]}&ndash;{peopleMinMax[1]}&nbsp;чел
+            {
+              bookingInfo
+                ?
+                bookingInfo.peopleCount
+                :
+                `${peopleMinMax[0]}–${peopleMinMax[1]}`
+            }&nbsp;чел
           </li>
           <li className="tags__item">
             <svg width="14" height="14" aria-hidden="true">
@@ -53,11 +81,12 @@ const QuestPreviewComponent = ({quest, pageType = 'MAIN'}: QuestPreviewComponent
           </li>
         </ul>
         {
-          pageType === 'MY_BOOKINGS'
+          bookingInfo
           &&
           <button
             className="btn btn--accent btn--secondary quest-card__btn"
             type="button"
+            onClick={() => dispatch(removeBooking(bookingInfo.id))}
           >
             Отменить
           </button>

@@ -28,7 +28,7 @@ const BookingTimeOptions = ({
               }
             )}
             value={`${title}-${slot.time}`}
-            disabled={slot.isAvailable}
+            disabled={!slot.isAvailable}
           />
           <span className="custom-radio__label">{slot.time}</span>
         </label>

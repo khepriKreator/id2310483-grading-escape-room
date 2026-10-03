@@ -52,3 +52,13 @@ export type UserResponseData = {
   email: string;
   token: string;
 }
+
+export type BookingRequestInfo = {
+  date: string;
+  time: string;
+  contactPerson: string;
+  phone: string;
+  withChildren: boolean;
+  peopleCount: number;
+  placeId: string;
+}

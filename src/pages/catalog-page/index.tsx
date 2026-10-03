@@ -29,7 +29,7 @@ const CatalogPage = () => {
         <h2 className="title visually-hidden">Выберите квест</h2>
         <div className="cards-grid">
           {quests.map((quest) => (
-            <QuestPreviewComponent key={quest.id} quest={quest} />
+            <QuestPreviewComponent key={quest.id} data={{quest, type: 'quest'}} />
           ))}
         </div>
       </div>

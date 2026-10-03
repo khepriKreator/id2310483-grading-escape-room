@@ -1,15 +1,17 @@
+import { UseFormRegister } from 'react-hook-form';
 import { Slot } from '../../../shared/api/models';
+import { BookingFormData } from '../';
 
 type BookingTimeOptionsProps = {
   slots: Slot[];
   title: string;
-  onChange: () => void;
+  register: UseFormRegister<BookingFormData>;
 };
 
 const BookingTimeOptions = ({
   slots,
   title,
-  onChange,
+  register,
 }: BookingTimeOptionsProps) => (
   <fieldset className="booking-form__date-section">
     <legend className="booking-form__date-title">{title}</legend>
@@ -19,10 +21,13 @@ const BookingTimeOptions = ({
           <input
             type="radio"
             id={`${title}-${slot.time}`}
-            name={title}
-            required
+            {...register(
+              'date',
+              {
+                required: 'Выберите время',
+              }
+            )}
             value={`${title}-${slot.time}`}
-            onChange={() => onChange()}
             disabled={slot.isAvailable}
           />
           <span className="custom-radio__label">{slot.time}</span>

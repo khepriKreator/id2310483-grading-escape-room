@@ -1,0 +1,4 @@
+.backgroundPictureBlur {
+  filter: blur(90px);
+  -webkit-filter: blur(90px);
+};

@@ -8,11 +8,11 @@ export type LayoutProps = {
 };
 
 const LayoutName = ({authStatus}: LayoutProps) => (
-  <>
+  <div className="wrapper">
     <Header authStatus={authStatus} />
     <Outlet />
     <Footer />
-  </>
+  </div>
 );
 
 export default LayoutName;

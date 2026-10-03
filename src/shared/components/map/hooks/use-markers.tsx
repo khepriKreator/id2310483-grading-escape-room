@@ -28,6 +28,8 @@ const useMarkers = (
 
     markersLayer.clearLayers();
 
+    const markersCoords: Array<[number, number]> = [];
+
     if (quests) {
       const handleActiveMarkerChange = (id: string) => {
         if (onPlaceChange) {
@@ -38,6 +40,8 @@ const useMarkers = (
       };
 
       quests.forEach(({ id, location }) => {
+        markersCoords.push(location.coords);
+
         const marker = leaflet.marker(
           {
             lat: location.coords[0],
@@ -51,6 +55,10 @@ const useMarkers = (
         marker.addTo(markersLayer);
 
         markersRef.current.set(id, marker);
+      });
+
+      map.fitBounds(markersCoords, {
+        padding: [50, 50],
       });
     } else if (contactsAddress) {
       const marker = leaflet.marker(

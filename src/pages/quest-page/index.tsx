@@ -1,22 +1,36 @@
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { AuthStatus, Paths } from '../../shared/api/const';
 import { getAuthStatus } from '../../shared/api/store/slices/user-slice/selectors';
-import { useAppSelector } from '../../shared/api/store/hooks';
-import { useGetQuest } from './hooks/useGetQuest';
+import { useAppDispatch, useAppSelector } from '../../shared/api/store/hooks';
 import Spinner from '../../shared/components/spinner';
+import { getIsQuestFetching, getQuest } from '../../shared/api/store/slices/quest-slice/selectors';
+import { fetchQuest } from '../../shared/api/store/api-actions';
+import { useEffect } from 'react';
 
 const QuestPage = () => {
   const {id} = useParams();
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const authStatus = useAppSelector(getAuthStatus);
-  const { quest, isNotFound, isFetching } = useGetQuest(id);
+  const quest = useAppSelector(getQuest);
+  const isFetching = useAppSelector(getIsQuestFetching);
+
+  useEffect(
+    () => {
+      let shouldUpdate = true;
+
+      if (id && shouldUpdate) {
+        dispatch(fetchQuest(id));
+      }
+
+      return () => {
+        shouldUpdate = false;
+      };
+    },
+    [id, dispatch]
+  );
 
   if (isFetching) {
     return <Spinner/>;
-  }
-
-  if (isNotFound) {
-    navigate(Paths.NOT_FOUND);
   }
 
   if (!id || !quest) {

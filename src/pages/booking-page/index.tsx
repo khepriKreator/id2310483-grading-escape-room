@@ -1,22 +1,55 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Map from '../../shared/components/map';
-import { generateQuest, generateQuestBookings } from '../../utils/mocks';
 import BookingInfo from './components/booking-info';
 import BookingTimeOptions from './components/booking-time-options';
 import { QuestBooking } from '../../shared/api/models';
+import { useParams } from 'react-router-dom';
+import { useGetBookingInfo } from './hooks/useGetBookingInfo';
+import Spinner from '../../shared/components/spinner';
+import { useAppSelector } from '../../shared/api/store/hooks';
+import { useForm } from 'react-hook-form';
+import { getQuest } from '../../shared/api/store/slices/quest-slice/selectors';
+import styles from './styles.module.css';
 
-const BOOKINGS_COUNT = 4;
-
-const bookingsInfo = generateQuestBookings(BOOKINGS_COUNT);
-const quest = generateQuest();
+export type BookingFormData = {
+  date: string;
+  contactPerson: string;
+  phone: string;
+  withChildren: boolean;
+  peopleCount: number;
+  placeId: string;
+};
 
 const BookingPage = () => {
-  const [selectedPlace, setSelectedPlace] = useState<QuestBooking>(
-    bookingsInfo[0],
-  );
+  const { id } = useParams();
+  const { bookingInfo, isFetching } = useGetBookingInfo(id);
+  const quest = useAppSelector(getQuest);
+  const [selectedPlace, setSelectedPlace] = useState<QuestBooking | null>(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<BookingFormData>({
+    mode: 'onBlur',
+  });
 
-  const onPlaceChange = (id: string) => {
-    const place = bookingsInfo.find((item) => item.id === id);
+  useEffect(() => {
+    if (bookingInfo) {
+      setSelectedPlace(bookingInfo[0]);
+    }
+  }, [bookingInfo]);
+
+  if (isFetching) {
+    return <Spinner />;
+  }
+
+  if (!bookingInfo || !quest) {
+    return;
+  }
+
+  const onPlaceChange = (placeId: string) => {
+    const place = bookingInfo.find((item) => item.id === placeId);
 
     if (place) {
       setSelectedPlace(place);
@@ -25,18 +58,17 @@ const BookingPage = () => {
 
   return (
     <main className="page-content decorated-page">
-      <div className="decorated-page__decor" aria-hidden="true">
+      <div className={`${styles.backgroundPictureBlur} decorated-page__decor`} aria-hidden="true">
         <picture>
           <source
             type="image/webp"
-            srcSet="img/content/maniac/maniac-bg-size-m.webp, img/content/maniac/maniac-bg-size-m@2x.webp 2x"
+            srcSet={quest.coverImgWebp}
           />
           <img
-            src="img/content/maniac/maniac-bg-size-m.jpg"
-            srcSet="img/content/maniac/maniac-bg-size-m@2x.jpg 2x"
+            src={quest.coverImg}
             width="1366"
             height="1959"
-            alt=""
+            alt="обложка квеста"
           />
         </picture>
       </div>
@@ -46,7 +78,7 @@ const BookingPage = () => {
             Бронирование квеста
           </h1>
           <p className="title title--size-m title--uppercase page-content__title">
-            {quest.title}
+            {quest?.title}
           </p>
         </div>
         <div className="page-content__item">
@@ -54,14 +86,14 @@ const BookingPage = () => {
             <div className="map">
               <div className="map__container">
                 <Map
-                  center={bookingsInfo[0].location}
-                  quests={bookingsInfo}
+                  center={bookingInfo[0].location}
+                  quests={bookingInfo}
                   onPlaceChange={onPlaceChange}
                 />
               </div>
             </div>
             <p className="booking-map__address">
-              Вы&nbsp;выбрали: {selectedPlace.location.address}
+              Вы&nbsp;выбрали: {selectedPlace?.location.address}
             </p>
           </div>
         </div>
@@ -72,16 +104,21 @@ const BookingPage = () => {
         >
           <fieldset className="booking-form__section">
             <legend className="visually-hidden">Выбор даты и времени</legend>
-            {Object.keys(selectedPlace.slots).map((date) => (
-              <BookingTimeOptions
-                key={date}
-                slots={selectedPlace.slots[date]}
-                title={date}
-                onChange={() => console.log('slot')}
-              />
-            ))}
+            {selectedPlace &&
+              Object.keys(selectedPlace.slots).map((date) => (
+                <BookingTimeOptions
+                  key={date}
+                  slots={selectedPlace.slots[date]}
+                  title={date}
+                  register={register}
+                />
+              ))}
           </fieldset>
-          <BookingInfo onChange={() => console.log('info')} />
+          <BookingInfo
+            register={register}
+            errors={errors}
+            peopleMinMax={quest.peopleMinMax}
+          />
           <button
             className="btn btn--accent btn--cta booking-form__submit"
             type="submit"

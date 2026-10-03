@@ -8,6 +8,7 @@ export enum AuthStatus {
 
 export enum SlicesNames {
   Quests = 'QUESTS',
+  Quest = 'QUEST',
   User = 'USER',
   UserBookings = 'USER_BOOKINGS',
 }

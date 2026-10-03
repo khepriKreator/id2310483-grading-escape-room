@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios';
 import { ApiPaths } from '../const';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { dropToken, setToken } from '../services/token';
-import { AuthData, QuestPreview, UserBooking, UserResponseData } from '../models';
+import { AuthData, Quest, QuestPreview, UserBooking, UserResponseData } from '../models';
 import { AppDispatch } from './store-types';
 import { State } from './store-types';
 
@@ -16,6 +16,19 @@ export const fetchQuests = createAsyncThunk<
   }
 >('quest/fetchQuests', async (_, { extra: api }) => {
   const response = await api.get<QuestPreview[]>(ApiPaths.QUEST);
+  return response.data;
+});
+
+export const fetchQuest = createAsyncThunk<
+  Quest,
+  string,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('quest/fetchQuest', async (id, {extra: api}) => {
+  const response = await api.get<Quest>(`${ApiPaths.QUEST}/${id}`);
   return response.data;
 });
 

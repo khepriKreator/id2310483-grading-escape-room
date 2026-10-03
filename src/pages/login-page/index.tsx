@@ -3,8 +3,8 @@ import { useAppDispatch, useAppSelector } from '../../shared/api/store/hooks';
 import { getAuthStatus } from '../../shared/api/store/slices/user-slice/selectors';
 import { AuthStatus, Paths } from '../../shared/api/const';
 import { useForm } from 'react-hook-form';
-import styles from './styles.module.css';
 import { login } from '../../shared/api/store/api-actions';
+import FormInputError from '../../shared/components/form-input-error';
 
 type FormData = {
   email: string;
@@ -93,9 +93,7 @@ export const LoginPage = () => {
                     )}
                     placeholder="Адрес электронной почты"
                   />
-                  <div className={styles.errorContainer}>
-                    {errors?.email && <p className={styles.errorText}>{errors?.email?.message || 'Ошибка!'}</p>}
-                  </div>
+                  <FormInputError errors={errors} name="email"/>
                 </div>
                 <div className="custom-input login-form__input">
                   <label className="custom-input__label" htmlFor="password">
@@ -126,9 +124,7 @@ export const LoginPage = () => {
                     }
                     placeholder="Пароль"
                   />
-                  <div className={styles.errorContainer}>
-                    {errors?.password && <p className={styles.errorText}>{errors?.password?.message || 'Ошибка!'}</p>}
-                  </div>
+                  <FormInputError errors={errors} name="password"/>
                 </div>
               </div>
               <button

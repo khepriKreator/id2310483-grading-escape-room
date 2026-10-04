@@ -15,6 +15,15 @@ const useMarkers = (
     new globalThis.Map<string, leaflet.Marker>(),
   );
 
+  useEffect(
+    () => {
+      if (bookingInfo) {
+        setActiveMarker(bookingInfo[0].id);
+      }
+    },
+    [bookingInfo]
+  );
+
   useEffect(() => {
     if (!map) {
       return;

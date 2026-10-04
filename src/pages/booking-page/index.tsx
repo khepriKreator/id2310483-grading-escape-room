@@ -4,14 +4,14 @@ import BookingInfo from './components/booking-info';
 import BookingTimeOptions from './components/booking-time-options';
 import { QuestBooking } from '../../shared/api/models';
 import { useParams } from 'react-router-dom';
-import { useGetBookingInfo } from './hooks/useGetBookingInfo';
+import { useGetBookingInfo } from './hooks/use-get-booking-info';
 import Spinner from '../../shared/components/spinner';
 import { useAppDispatch, useAppSelector } from '../../shared/api/store/hooks';
 import { useForm } from 'react-hook-form';
 import { getQuest } from '../../shared/api/store/slices/quest-slice/selectors';
 import styles from './styles.module.css';
 import { createBookingRequestInfo } from '../../utils/functions';
-import { useBooking } from './hooks/useBooking';
+import { useBooking } from './hooks/use-booking';
 import { fetchQuest } from '../../shared/api/store/api-actions';
 
 export type BookingFormData = {

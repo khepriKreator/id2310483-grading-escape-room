@@ -21,6 +21,19 @@ export const filterQuests = (
   return result;
 };
 
+export const getLevelTranslation = (level: string): string => {
+  switch (level) {
+    case 'easy':
+      return 'Легкий';
+    case 'medium':
+      return 'Средний';
+    case 'hard':
+      return 'Сложный';
+    default:
+      return '';
+  }
+}
+
 export const createBookingRequestInfo = (
   data: BookingFormData,
   placeId: string,

@@ -1,19 +1,18 @@
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AuthStatus, Paths } from '../../api/const';
-import { useAppDispatch } from '../../api/store/hooks';
-import { logout } from '../../api/store/api-actions';
+import { useLogout } from '../../api/hooks/use-logout';
 
 type HeaderProps = {
   authStatus: AuthStatus;
 };
 
 const Header = ({ authStatus }: HeaderProps) => {
-  const dispatch = useAppDispatch();
   const location = useLocation();
+  const logout = useLogout();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logout());
+    logout();
 
     if (location.pathname === Paths.MY_BOOKINGS) {
       navigate(Paths.MAIN);

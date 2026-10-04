@@ -8,7 +8,7 @@ type PrivateRouteProps = PropsWithChildren<{
 const PrivateRoute = ({ children, authStatus }: PrivateRouteProps) => (
   authStatus === AuthStatus.Auth
     ?
-    <div>{children}</div>
+    children
     :
     null
 );

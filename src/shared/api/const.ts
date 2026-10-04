@@ -25,7 +25,7 @@ export const Paths = {
 
 export const ApiPaths = {
   QUEST: 'quest',
-  MY_BOOKINGS: 'reservation',
+  USER_BOOKING: 'reservation',
   LOGIN: 'login',
   LOGOUT: 'logout',
 } as const;

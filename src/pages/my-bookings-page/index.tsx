@@ -1,6 +1,7 @@
 import { useAppSelector } from '../../shared/api/store/hooks';
 import { getUserBookings } from '../../shared/api/store/slices/user-bookings-slice/selectors';
 import QuestPreviewComponent from '../../shared/components/quest-preview';
+import EmptyBooking from './components/empty-bookings';
 
 const MyBookingsPage = () => {
   const bookings = useAppSelector(getUserBookings);
@@ -28,14 +29,20 @@ const MyBookingsPage = () => {
             Мои бронирования
           </h1>
         </div>
-        <div className="cards-grid">
-          {bookings.map((booking) => (
-            <QuestPreviewComponent
-              key={booking.id}
-              data={{ booking, type: 'booking' }}
-            />
-          ))}
-        </div>
+        {
+          bookings.length !== 0
+            ?
+            <div className="cards-grid">
+              {bookings.map((booking) => (
+                <QuestPreviewComponent
+                  key={booking.id}
+                  data={{ booking, type: 'booking' }}
+                />
+              ))}
+            </div>
+            :
+            <EmptyBooking/>
+        }
       </div>
     </main>
   );

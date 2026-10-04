@@ -3,44 +3,42 @@ import { QuestBooking } from '../../../shared/api/models';
 import { ApiPaths } from '../../../shared/api/const';
 import { api } from '../../../shared/api/services/api-service';
 
-
 export const useGetBookingInfo = (id?: string) => {
   const [bookingInfo, setBookingInfo] = useState<QuestBooking[] | null>(null);
   const [isFetching, setIsFetching] = useState<boolean>(false);
 
-  useEffect(
-    () => {
-      let shouldUpdate = true;
+  useEffect(() => {
+    let shouldUpdate = true;
 
+    const fetchBookingInfo = async () => {
       if (!id) {
         return;
       }
 
-      const fetchBookingInfo = async () => {
-        if (!shouldUpdate) {
-          return;
-        }
+      if (!shouldUpdate) {
+        return;
+      }
 
-        const response = await api.get<QuestBooking[]>(`${ApiPaths.QUEST}/${id}/booking`);
+      const response = await api.get<QuestBooking[]>(
+        `${ApiPaths.QUEST}/${id}/booking`,
+      );
 
-        if (response.status === 200) {
-          setBookingInfo(response.data);
-        }
+      if (response.status === 200) {
+        setBookingInfo(response.data);
+      }
 
-        setIsFetching(false);
-      };
+      setIsFetching(false);
+    };
 
-      fetchBookingInfo();
+    fetchBookingInfo();
 
-      return () => {
-        shouldUpdate = false;
-      };
-    },
-    [id]
-  );
+    return () => {
+      shouldUpdate = false;
+    };
+  }, [id]);
 
   return {
     bookingInfo,
-    isFetching
+    isFetching,
   };
 };

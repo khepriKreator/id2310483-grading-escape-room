@@ -6,12 +6,13 @@ import { QuestBooking } from '../../shared/api/models';
 import { useParams } from 'react-router-dom';
 import { useGetBookingInfo } from './hooks/useGetBookingInfo';
 import Spinner from '../../shared/components/spinner';
-import { useAppSelector } from '../../shared/api/store/hooks';
+import { useAppDispatch, useAppSelector } from '../../shared/api/store/hooks';
 import { useForm } from 'react-hook-form';
 import { getQuest } from '../../shared/api/store/slices/quest-slice/selectors';
 import styles from './styles.module.css';
 import { createBookingRequestInfo } from '../../utils/functions';
 import { useBooking } from './hooks/useBooking';
+import { fetchQuest } from '../../shared/api/store/api-actions';
 
 export type BookingFormData = {
   date: string;
@@ -24,6 +25,7 @@ export type BookingFormData = {
 
 const BookingPage = () => {
   const { id } = useParams();
+  const dispatch = useAppDispatch();
   const { bookingInfo, isFetching } = useGetBookingInfo(id);
   const { handleBooking } = useBooking();
   const quest = useAppSelector(getQuest);
@@ -37,11 +39,22 @@ const BookingPage = () => {
     mode: 'onBlur',
   });
 
-  useEffect(() => {
-    if (bookingInfo) {
-      setSelectedPlace(bookingInfo[0]);
-    }
-  }, [bookingInfo]);
+  useEffect(
+    () => {
+      if (!id) {
+        return;
+      }
+
+      if (!quest) {
+        dispatch(fetchQuest(id));
+      }
+
+      if (bookingInfo) {
+        setSelectedPlace(bookingInfo[0]);
+      }
+    },
+    [dispatch, quest, id, bookingInfo]
+  );
 
   if (isFetching) {
     return <Spinner />;
@@ -101,7 +114,7 @@ const BookingPage = () => {
               <div className="map__container">
                 <Map
                   center={bookingInfo[0].location}
-                  quests={bookingInfo}
+                  bookingInfo={bookingInfo}
                   onPlaceChange={onPlaceChange}
                 />
               </div>

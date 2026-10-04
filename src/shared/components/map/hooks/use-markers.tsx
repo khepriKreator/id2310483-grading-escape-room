@@ -5,11 +5,11 @@ import { QuestBooking, Location } from '../../../api/models';
 
 const useMarkers = (
   map: leaflet.Map | null,
-  quests?: QuestBooking[],
+  bookingInfo?: QuestBooking[],
   contactsAddress?: Location,
   onPlaceChange?: (id: string) => void,
 ) => {
-  const [activeMarker, setActiveMarket] = useState<string | null>(null);
+  const [activeMarker, setActiveMarker] = useState<string | null>(null);
   const markersLayerRef = useRef<LayerGroup | null>(null);
   const markersRef = useRef<Map<string, leaflet.Marker>>(
     new globalThis.Map<string, leaflet.Marker>(),
@@ -30,16 +30,16 @@ const useMarkers = (
 
     const markersCoords: Array<[number, number]> = [];
 
-    if (quests) {
+    if (bookingInfo) {
       const handleActiveMarkerChange = (id: string) => {
         if (onPlaceChange) {
           onPlaceChange(id);
         }
 
-        setActiveMarket(id);
+        setActiveMarker(id);
       };
 
-      quests.forEach(({ id, location }) => {
+      bookingInfo.forEach(({ id, location }) => {
         markersCoords.push(location.coords);
 
         const marker = leaflet.marker(
@@ -73,7 +73,7 @@ const useMarkers = (
       marker.addTo(markersLayer);
       markersRef.current.set(contactsAddress.address, marker);
     }
-  }, [map, quests, activeMarker, contactsAddress, onPlaceChange]);
+  }, [map, bookingInfo, activeMarker, contactsAddress, onPlaceChange]);
 
   return markersRef;
 };

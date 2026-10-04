@@ -8,15 +8,15 @@ import { ACTIVE_MARKER, DEFAULT_MARKER } from './const';
 
 type MapProps = {
   center: Location;
-  quests?: QuestBooking[];
+  bookingInfo?: QuestBooking[];
   contactsAddress?: Location;
   onPlaceChange?: (id: string) => void;
 };
 
-const Map = ({ center, quests, contactsAddress, onPlaceChange }: MapProps) => {
+const Map = ({ center, bookingInfo, contactsAddress, onPlaceChange }: MapProps) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const map = useMap(mapRef, center);
-  const markersRef = useMarkers(map, quests, contactsAddress, onPlaceChange);
+  const markersRef = useMarkers(map, bookingInfo, contactsAddress, onPlaceChange);
   const activeMarkerRef = useRef<leaflet.Marker | null>(null);
 
   useEffect(() => {
@@ -26,8 +26,8 @@ const Map = ({ center, quests, contactsAddress, onPlaceChange }: MapProps) => {
       activeMarkerRef.current = null;
     }
 
-    if (quests) {
-      const marker = markersRef.current.get(quests[0].id);
+    if (bookingInfo) {
+      const marker = markersRef.current.get(bookingInfo[0].id);
 
       marker?.setIcon(ACTIVE_MARKER);
       activeMarkerRef.current = marker ?? null;
@@ -36,7 +36,7 @@ const Map = ({ center, quests, contactsAddress, onPlaceChange }: MapProps) => {
     return () => {
       isMounted = false;
     };
-  }, [markersRef, quests]);
+  }, [markersRef, bookingInfo]);
 
   return (
     <div className="map">

@@ -1,7 +1,4 @@
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../shared/api/store/hooks';
-import { getAuthStatus } from '../../shared/api/store/slices/user-slice/selectors';
-import { AuthStatus, Paths } from '../../shared/api/const';
+import { useAppDispatch } from '../../shared/api/store/hooks';
 import { useForm } from 'react-hook-form';
 import { login } from '../../shared/api/store/api-actions';
 import FormInputError from '../../shared/components/form-input-error';
@@ -22,8 +19,6 @@ const emailValidation = {
 
 export const LoginPage = () => {
   const dispatch = useAppDispatch();
-  const authStatus = useAppSelector(getAuthStatus);
-  const navigate = useNavigate();
   const {
     formState: {
       errors,
@@ -36,10 +31,6 @@ export const LoginPage = () => {
   } = useForm<FormData>({
     mode: 'onBlur',
   });
-
-  if (authStatus === AuthStatus.Auth) {
-    navigate(Paths.MAIN);
-  }
 
   const onSubmit = handleSubmit((data) => {
     dispatch(login(data));

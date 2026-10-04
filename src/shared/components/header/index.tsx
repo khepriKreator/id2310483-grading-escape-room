@@ -14,7 +14,7 @@ const Header = ({ authStatus }: HeaderProps) => {
   const handleLogout = () => {
     logout();
 
-    if (location.pathname === Paths.MY_BOOKINGS) {
+    if (location.pathname.includes(Paths.MY_BOOKINGS) || location.pathname.includes(Paths.BOOKING)) {
       navigate(Paths.MAIN);
     }
   };

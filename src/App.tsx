@@ -11,36 +11,41 @@ import BookingPage from './pages/booking-page';
 import NotFoundPage from './pages/not-found-page';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './shared/api/store/hooks';
-import { checkAuth, fetchQuests, fetchUserBookings } from './shared/api/store/api-actions';
+import {
+  checkAuth,
+  fetchQuests,
+  fetchUserBookings,
+} from './shared/api/store/api-actions';
 import { getAuthStatus } from './shared/api/store/slices/user-slice/selectors';
 
 export const App = () => {
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector(getAuthStatus);
 
-  useEffect(
-    () => {
-      dispatch(checkAuth());
-      dispatch(fetchQuests());
-    },
-    [dispatch]
-  );
+  useEffect(() => {
+    dispatch(checkAuth());
+    dispatch(fetchQuests());
+  }, [dispatch]);
 
-  useEffect(
-    () => {
-      if (authStatus === AuthStatus.Auth) {
-        dispatch(fetchUserBookings());
-      }
-    },
-    [dispatch, authStatus]
-  );
+  useEffect(() => {
+    if (authStatus === AuthStatus.Auth) {
+      dispatch(fetchUserBookings());
+    }
+  }, [dispatch, authStatus]);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={Paths.MAIN} element={<Layout authStatus={authStatus}/>}>
+        <Route path={Paths.MAIN} element={<Layout authStatus={authStatus} />}>
           <Route index element={<CatalogPage />} />
-          <Route path={Paths.LOGIN} element={<LoginPage />} />
+          <Route
+            path={Paths.LOGIN}
+            element={
+              <PrivateRoute authStatus={authStatus} isLoginPage>
+                <LoginPage />
+              </PrivateRoute>
+            }
+          />
           <Route
             path={Paths.MY_BOOKINGS}
             element={

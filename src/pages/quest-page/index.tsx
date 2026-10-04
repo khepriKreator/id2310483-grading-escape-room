@@ -6,6 +6,7 @@ import Spinner from '../../shared/components/spinner';
 import { getIsQuestFetching, getQuest } from '../../shared/api/store/slices/quest-slice/selectors';
 import { fetchQuest } from '../../shared/api/store/api-actions';
 import { useEffect } from 'react';
+import { getThemeTranslation } from '../../utils/functions';
 
 const QuestPage = () => {
   const {id} = useParams();
@@ -59,7 +60,7 @@ const QuestPage = () => {
             {quest.title}
           </h1>
           <p className="subtitle quest-page__subtitle">
-            <span className="visually-hidden">Жанр:</span>{quest.type}
+            <span className="visually-hidden">Жанр:</span>{getThemeTranslation(quest.type)}
           </p>
           <ul className="tags tags--size-l quest-page__tags">
             <li className="tags__item">

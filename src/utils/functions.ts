@@ -32,7 +32,24 @@ export const getLevelTranslation = (level: string): string => {
     default:
       return '';
   }
-}
+};
+
+export const getThemeTranslation = (theme: string): string => {
+  switch (theme) {
+    case 'adventures':
+      return 'приключения';
+    case 'horror':
+      return 'ужасы';
+    case 'detective':
+      return 'детектив';
+    case 'sci-fi':
+      return 'sci-fi';
+    case 'mystic':
+      return 'мистика';
+    default:
+      return '';
+  }
+};
 
 export const createBookingRequestInfo = (
   data: BookingFormData,

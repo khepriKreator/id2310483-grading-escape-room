@@ -41,7 +41,7 @@ export const fetchUserBookings = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('quests/fetchMyBookings', async (_, {extra: api}) => {
-  const response = await api.get<UserBooking[]>(ApiPaths.MY_BOOKINGS);
+  const response = await api.get<UserBooking[]>(ApiPaths.USER_BOOKING);
   return response.data;
 });
 

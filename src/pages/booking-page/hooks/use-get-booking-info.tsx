@@ -19,6 +19,8 @@ export const useGetBookingInfo = (id?: string) => {
         return;
       }
 
+      setIsFetching(true);
+
       const response = await api.get<QuestBooking[]>(
         `${ApiPaths.QUEST}/${id}/booking`,
       );

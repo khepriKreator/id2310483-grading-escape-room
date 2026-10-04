@@ -8,7 +8,7 @@
 }
 
 .spinner {
-  background-image: url('public/img/svg/pin-active.svg');
+  background-image: url('../../../..//public/img/svg/pin-active.svg');
   background-repeat: no-repeat;
   background-size: 49px 70px;
   background-position: center;

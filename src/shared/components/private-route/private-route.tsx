@@ -10,6 +10,10 @@ type PrivateRouteProps = PropsWithChildren<{
 const PrivateRoute = ({ children, authStatus, isLoginPage = false }: PrivateRouteProps) => {
   const navigate = useNavigate();
 
+  if (authStatus === AuthStatus.Unknown) {
+    return null;
+  }
+
   if (isLoginPage && authStatus === AuthStatus.Auth) {
     navigate(Paths.Main);
     return;

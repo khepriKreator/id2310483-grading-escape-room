@@ -38,10 +38,10 @@ export const App = () => {
     <BrowserRouter>
       <ToastContainer position={'top-center'} />
       <Routes>
-        <Route path={Paths.MAIN} element={<Layout authStatus={authStatus} />}>
+        <Route path={Paths.Main} element={<Layout authStatus={authStatus} />}>
           <Route index element={<CatalogPage />} />
           <Route
-            path={Paths.LOGIN}
+            path={Paths.Login}
             element={
               <PrivateRoute authStatus={authStatus} isLoginPage>
                 <LoginPage />
@@ -49,24 +49,24 @@ export const App = () => {
             }
           />
           <Route
-            path={Paths.MY_BOOKINGS}
+            path={Paths.UserBooking}
             element={
               <PrivateRoute authStatus={authStatus}>
                 <MyBookingsPage />
               </PrivateRoute>
             }
           />
-          <Route path={Paths.CONTACTS} element={<ContactsPage />} />
-          <Route path={`${Paths.QUESTS}/:id`} element={<QuestPage />} />
+          <Route path={Paths.Contacts} element={<ContactsPage />} />
+          <Route path={`${Paths.Quests}/:id`} element={<QuestPage />} />
           <Route
-            path={`${Paths.QUESTS}/:id/${Paths.BOOKING}`}
+            path={`${Paths.Quests}/:id/${Paths.Booking}`}
             element={
               <PrivateRoute authStatus={authStatus}>
                 <BookingPage />
               </PrivateRoute>
             }
           />
-          <Route path={Paths.NOT_FOUND} element={<NotFoundPage />} />
+          <Route path={Paths.NotFound} element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

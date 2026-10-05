@@ -7,7 +7,7 @@ export const useDeleteBooking = () => {
   const dispatch = useAppDispatch();
 
   const deleteBooking = async (id: string) => {
-    const response = await api.delete(`${ApiPaths.USER_BOOKING}/${id}`);
+    const response = await api.delete(`${ApiPaths.UserBooking}/${id}`);
 
     if (response.status === 204) {
       dispatch(removeBooking(id));

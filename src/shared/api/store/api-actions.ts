@@ -15,7 +15,7 @@ export const fetchQuests = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('quest/fetchQuests', async (_, { extra: api }) => {
-  const response = await api.get<QuestPreview[]>(ApiPaths.QUEST);
+  const response = await api.get<QuestPreview[]>(ApiPaths.Quest);
   return response.data;
 });
 
@@ -28,7 +28,7 @@ export const fetchQuest = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('quest/fetchQuest', async (id, {extra: api}) => {
-  const response = await api.get<Quest>(`${ApiPaths.QUEST}/${id}`);
+  const response = await api.get<Quest>(`${ApiPaths.Quest}/${id}`);
   return response.data;
 });
 
@@ -41,7 +41,7 @@ export const fetchUserBookings = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('quests/fetchMyBookings', async (_, {extra: api}) => {
-  const response = await api.get<UserBooking[]>(ApiPaths.USER_BOOKING);
+  const response = await api.get<UserBooking[]>(ApiPaths.UserBooking);
   return response.data;
 });
 
@@ -54,7 +54,7 @@ export const checkAuth = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('user/check', async (_, {extra: api}) => {
-  const response = await api.get<UserResponseData>(ApiPaths.LOGIN);
+  const response = await api.get<UserResponseData>(ApiPaths.Login);
 
   return response.data.email;
 });
@@ -68,7 +68,7 @@ export const login = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('user/login', async (data, {extra: api}) => {
-  const response = await api.post<UserResponseData>(ApiPaths.LOGIN, data);
+  const response = await api.post<UserResponseData>(ApiPaths.Login, data);
   const token = response.data.token;
 
   setToken(token);
@@ -85,6 +85,6 @@ export const logout = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('user/logout', async (_, {extra: api}) => {
-  await api.delete(ApiPaths.LOGOUT);
+  await api.delete(ApiPaths.Logout);
   dropToken();
 });

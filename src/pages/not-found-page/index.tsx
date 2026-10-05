@@ -8,7 +8,7 @@ const NotFoundPage = () => (
     <p className={styles.description}>
       Вы перешли на несуществующую страницу
     </p>
-    <Link to={Paths.MAIN} className={styles.linkButton}>
+    <Link to={Paths.Main} className={styles.linkButton}>
       На главную
     </Link>
   </div>

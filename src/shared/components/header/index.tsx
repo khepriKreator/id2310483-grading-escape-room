@@ -14,15 +14,15 @@ const Header = ({ authStatus }: HeaderProps) => {
   const handleLogout = () => {
     logout();
 
-    if (location.pathname.includes(Paths.MY_BOOKINGS) || location.pathname.includes(Paths.BOOKING)) {
-      navigate(Paths.MAIN);
+    if (location.pathname.includes(Paths.UserBooking) || location.pathname.includes(Paths.Booking)) {
+      navigate(Paths.Main);
     }
   };
 
   return (
     <header className="header">
       <div className="container container--size-l">
-        <Link to={Paths.MAIN} className="logo header__logo">
+        <Link to={Paths.Main} className="logo header__logo">
           <svg width="134" height="52" aria-hidden="true">
             <use xlinkHref="#logo"></use>
           </svg>
@@ -35,7 +35,7 @@ const Header = ({ authStatus }: HeaderProps) => {
                   ({ isActive }) =>
                     isActive ? 'link active' : 'link'
                 }
-                to={Paths.MAIN}
+                to={Paths.Main}
               >
                 Квесты
               </NavLink>
@@ -46,7 +46,7 @@ const Header = ({ authStatus }: HeaderProps) => {
                   ({ isActive }) =>
                     isActive ? 'link active' : 'link'
                 }
-                to={Paths.CONTACTS}
+                to={Paths.Contacts}
               >
                 Контакты
               </NavLink>
@@ -58,7 +58,7 @@ const Header = ({ authStatus }: HeaderProps) => {
                     ({ isActive }) =>
                       isActive ? 'link active' : 'link'
                   }
-                  to={Paths.MY_BOOKINGS}
+                  to={Paths.UserBooking}
                 >
                   Мои бронирования
                 </NavLink>
@@ -78,7 +78,7 @@ const Header = ({ authStatus }: HeaderProps) => {
           ) : (
             <Link
               className="btn header__side-item header__login-btn"
-              to={Paths.LOGIN}
+              to={Paths.Login}
             >
               Вход
             </Link>

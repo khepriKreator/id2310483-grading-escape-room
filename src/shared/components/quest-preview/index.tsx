@@ -41,7 +41,7 @@ const QuestPreviewComponent = ({ data }: QuestPreviewComponentProps) => {
       </div>
       <div className="quest-card__content">
         <div className="quest-card__info-wrapper">
-          <Link className="quest-card__link" to={`${Paths.QUESTS}/${id}`}>
+          <Link className="quest-card__link" to={`${Paths.Quests}/${id}`}>
             {title}
           </Link>
           {bookingInfo && (

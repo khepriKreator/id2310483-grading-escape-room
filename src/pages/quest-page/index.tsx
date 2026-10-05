@@ -82,7 +82,7 @@ const QuestPage = () => {
           </p>
           <Link
             className="btn btn--accent btn--cta quest-page__btn"
-            to={authStatus === AuthStatus.Auth ? `${Paths.QUESTS}/${id}/${Paths.BOOKING}` : Paths.LOGIN}
+            to={authStatus === AuthStatus.Auth ? `${Paths.Quests}/${id}/${Paths.Booking}` : Paths.Login}
           >
             Забронировать
           </Link>

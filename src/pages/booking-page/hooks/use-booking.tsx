@@ -15,13 +15,13 @@ export const useBooking = () => {
     try {
       setIsUpdating(true);
       const response = await api.post<UserBooking>(
-        `${ApiPaths.QUEST}/${id}/booking`,
+        `${ApiPaths.Quest}/${id}/booking`,
         data,
       );
 
       if (response.status === 200) {
         dispatch(addBooking(response.data));
-        navigate(Paths.MY_BOOKINGS);
+        navigate(Paths.UserBooking);
       }
     } finally {
       setIsUpdating(false);

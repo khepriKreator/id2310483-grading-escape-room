@@ -14,31 +14,28 @@ export enum SlicesNames {
 }
 
 export const Paths = {
-  MAIN: '/',
-  LOGIN: '/login',
-  CONTACTS: '/contacts',
-  MY_BOOKINGS: '/my-bookings',
-  QUESTS: '/quests',
-  BOOKING: 'booking',
-  NOT_FOUND: '/*',
+  Main: '/',
+  Login: '/login',
+  Contacts: '/contacts',
+  UserBooking: '/my-bookings',
+  Quests: '/quests',
+  Booking: 'booking',
+  NotFound: '/*',
 } as const;
 
 export const ApiPaths = {
-  QUEST: 'quest',
-  USER_BOOKING: 'reservation',
-  LOGIN: 'login',
-  LOGOUT: 'logout',
+  Quest: 'quest',
+  UserBooking: 'reservation',
+  Login: 'login',
+  Logout: 'logout',
 } as const;
 
 export const Contacts = {
-  city: 'Санкт-Петербург',
-  address: 'Набережная реки Карповка, д 5П',
-  tel: '8 (812) 123-45-67',
-  email: 'info@escape-room.ru',
-  schedule: ['10:00', '22:00'],
+  City: 'Санкт-Петербург',
+  Address: 'Набережная реки Карповка, д 5П',
 } as const;
 
 export const ContactsLocation: Location = {
-  address: `${Contacts.city}, ${Contacts.address}`,
+  address: `${Contacts.City}, ${Contacts.Address}`,
   coords: [59.968322, 30.317359],
 } as const;

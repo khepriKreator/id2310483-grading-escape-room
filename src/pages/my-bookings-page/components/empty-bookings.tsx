@@ -7,7 +7,7 @@ const EmptyBooking = () => (
     <h1 className={styles.title}>
       У вас еще нет бронирований
     </h1>
-    <Link className={styles.linkButton} to={Paths.MAIN}>
+    <Link className={styles.linkButton} to={Paths.Main}>
       Забронировать квест
     </Link>
   </div>

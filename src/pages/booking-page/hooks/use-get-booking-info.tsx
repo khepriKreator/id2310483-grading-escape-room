@@ -22,7 +22,7 @@ export const useGetBookingInfo = (id?: string) => {
       setIsFetching(true);
 
       const response = await api.get<QuestBooking[]>(
-        `${ApiPaths.QUEST}/${id}/booking`,
+        `${ApiPaths.Quest}/${id}/booking`,
       );
 
       if (response.status === 200) {

@@ -11,10 +11,10 @@ const PrivateRoute = ({ children, authStatus, isLoginPage = false }: PrivateRout
   const navigate = useNavigate();
 
   if (isLoginPage && authStatus === AuthStatus.Auth) {
-    navigate(Paths.MAIN);
+    navigate(Paths.Main);
     return;
   } else if (!isLoginPage && authStatus === AuthStatus.No_Auth) {
-    navigate(Paths.LOGIN);
+    navigate(Paths.Login);
     return;
   }
 

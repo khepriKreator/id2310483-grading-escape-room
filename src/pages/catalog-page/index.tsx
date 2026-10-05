@@ -3,6 +3,7 @@ import { getFilteredQuests, getIsQuestsFetching } from '../../shared/api/store/s
 import FiltersList from '../../shared/components/filters';
 import QuestPreviewComponent from '../../shared/components/quest-preview';
 import Spinner from '../../shared/components/spinner';
+import EmptyQuestsList from './components/empty-quests-list';
 
 const CatalogPage = () => {
   const quests = useAppSelector(getFilteredQuests);
@@ -27,11 +28,18 @@ const CatalogPage = () => {
           <FiltersList />
         </div>
         <h2 className="title visually-hidden">Выберите квест</h2>
-        <div className="cards-grid">
-          {quests.map((quest) => (
-            <QuestPreviewComponent key={quest.id} data={{quest, type: 'quest'}} />
-          ))}
-        </div>
+        {quests.length === 0 ? (
+          <EmptyQuestsList />
+        ) : (
+          <div className="cards-grid">
+            {quests.map((quest) => (
+              <QuestPreviewComponent
+                key={quest.id}
+                data={{ quest, type: 'quest' }}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </main>
   );

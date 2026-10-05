@@ -61,6 +61,11 @@ const useMarkers = (
           },
         );
         marker.addEventListener('click', () => handleActiveMarkerChange(id));
+        marker.addEventListener('keydown', (evt) => {
+          if (evt.originalEvent.key === 'Enter') {
+            return handleActiveMarkerChange(id);
+          }
+        });
         marker.addTo(markersLayer);
 
         markersRef.current.set(id, marker);

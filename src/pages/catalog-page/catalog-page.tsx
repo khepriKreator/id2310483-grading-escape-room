@@ -1,8 +1,8 @@
 import { useAppSelector } from '../../shared/api/store/hooks';
 import { getFilteredQuests, getIsQuestsFetching } from '../../shared/api/store/slices/quests-slice/selectors';
-import FiltersList from '../../shared/components/filters';
-import QuestPreviewComponent from '../../shared/components/quest-preview';
-import Spinner from '../../shared/components/spinner';
+import FiltersList from '../../shared/components/filters/filters';
+import QuestPreviewComponent from '../../shared/components/quest-preview/quest-preview';
+import Spinner from '../../shared/components/spinner/spinner';
 import EmptyQuestsList from './components/empty-quests-list';
 
 const CatalogPage = () => {

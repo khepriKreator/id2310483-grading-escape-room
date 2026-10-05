@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../shared/api/store/hooks';
 import { getUserBookings } from '../../shared/api/store/slices/user-bookings-slice/selectors';
-import QuestPreviewComponent from '../../shared/components/quest-preview';
+import QuestPreviewComponent from '../../shared/components/quest-preview/quest-preview';
 import EmptyBooking from './components/empty-bookings';
 
 const MyBookingsPage = () => {

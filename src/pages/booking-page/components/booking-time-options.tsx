@@ -1,6 +1,6 @@
 import { UseFormRegister } from 'react-hook-form';
 import { Slot } from '../../../shared/api/models';
-import { BookingFormData } from '../';
+import { BookingFormData } from '../booking-page';
 
 type BookingTimeOptionsProps = {
   slots: Slot[];

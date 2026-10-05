@@ -13,7 +13,7 @@ const PrivateRoute = ({ children, authStatus, isLoginPage = false }: PrivateRout
   if (isLoginPage && authStatus === AuthStatus.Auth) {
     navigate(Paths.Main);
     return;
-  } else if (!isLoginPage && authStatus === AuthStatus.No_Auth) {
+  } else if (!isLoginPage && authStatus === AuthStatus.NoAuth) {
     navigate(Paths.Login);
     return;
   }

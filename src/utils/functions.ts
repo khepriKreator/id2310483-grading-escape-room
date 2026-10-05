@@ -1,4 +1,4 @@
-import { BookingFormData } from '../pages/booking-page';
+import { BookingFormData } from '../pages/booking-page/booking-page';
 import { SlicesNames } from '../shared/api/const';
 import { BookingRequestInfo, QuestPreview } from '../shared/api/models';
 import { State } from '../shared/api/store/store-types';

@@ -22,18 +22,18 @@ export const userSlice = createSlice({
       state.authStatus = AuthStatus.Auth;
     })
       .addCase(checkAuth.rejected, (state) => {
-        state.authStatus = AuthStatus.No_Auth;
+        state.authStatus = AuthStatus.NoAuth;
       })
       .addCase(login.fulfilled, (state, {payload}) => {
         state.email = payload;
         state.authStatus = AuthStatus.Auth;
       })
       .addCase(login.rejected, (state) => {
-        state.authStatus = AuthStatus.No_Auth;
+        state.authStatus = AuthStatus.NoAuth;
       })
       .addCase(logout.fulfilled, (state) => {
         state.email = null;
-        state.authStatus = AuthStatus.No_Auth;
+        state.authStatus = AuthStatus.NoAuth;
       });
   }
 });

@@ -1,20 +1,20 @@
 import { useAppDispatch } from '../../shared/api/store/hooks';
 import { useForm } from 'react-hook-form';
 import { login } from '../../shared/api/store/api-actions';
-import FormInputError from '../../shared/components/form-input-error';
+import FormInputError from '../../shared/components/form-input-error/form-input-error';
 
 type FormData = {
   email: string;
   password: string;
 };
 
-const passwordValidation = {
-  pattern: /^(?=.*[A-Za-z])(?=.*\d).+$/,
-  minMaxLength: [3, 15]
+const PasswordValidation = {
+  Pattern: /^(?=.*[A-Za-z])(?=.*\d).+$/,
+  MinMaxLength: [3, 15]
 };
 
-const emailValidation = {
-  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+const EmailValidation = {
+  Pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
 };
 
 export const LoginPage = () => {
@@ -77,7 +77,7 @@ export const LoginPage = () => {
                       {
                         required: 'Поле обязательно для заполнения',
                         pattern: {
-                          value: emailValidation.pattern,
+                          value: EmailValidation.Pattern,
                           message: 'Неверная почта',
                         },
                       }
@@ -99,15 +99,15 @@ export const LoginPage = () => {
                         {
                           required: 'Поле обязательно для заполнения',
                           minLength: {
-                            value: passwordValidation.minMaxLength[0],
-                            message: `Пароль должен содержать не менее ${passwordValidation.minMaxLength[0]} символов`
+                            value: PasswordValidation.MinMaxLength[0],
+                            message: `Пароль должен содержать не менее ${PasswordValidation.MinMaxLength[0]} символов`
                           },
                           maxLength: {
-                            value: passwordValidation.minMaxLength[1],
-                            message: `Пароль должен содержать не более ${passwordValidation.minMaxLength[1]} символов`
+                            value: PasswordValidation.MinMaxLength[1],
+                            message: `Пароль должен содержать не более ${PasswordValidation.MinMaxLength[1]} символов`
                           },
                           pattern: {
-                            value: passwordValidation.pattern,
+                            value: PasswordValidation.Pattern,
                             message: 'Пароль должен содержать хотя бы одну букву и одну цифру'
                           }
                         }

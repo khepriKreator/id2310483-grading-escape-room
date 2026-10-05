@@ -1,14 +1,14 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import CatalogPage from './pages/catalog-page';
-import Layout from './shared/components/layout';
+import CatalogPage from './pages/catalog-page/catalog-page';
+import Layout from './shared/components/layout/layout';
 import { AuthStatus, Paths } from './shared/api/const';
-import ContactsPage from './pages/contacts-page';
-import { LoginPage } from './pages/login-page';
-import PrivateRoute from './shared/components/private-route';
-import MyBookingsPage from './pages/my-bookings-page';
-import QuestPage from './pages/quest-page';
-import BookingPage from './pages/booking-page';
-import NotFoundPage from './pages/not-found-page';
+import ContactsPage from './pages/contacts-page/contacts-page';
+import { LoginPage } from './pages/login-page/login-page';
+import PrivateRoute from './shared/components/private-route/private-route';
+import MyBookingsPage from './pages/user-bookings-page/user-bookings-page';
+import QuestPage from './pages/quest-page/quest-page';
+import BookingPage from './pages/booking-page/booking-page';
+import NotFoundPage from './pages/not-found-page/not-found-page';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './shared/api/store/hooks';
 import {

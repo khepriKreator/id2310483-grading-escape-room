@@ -2,7 +2,7 @@ import { Location } from './models';
 
 export enum AuthStatus {
   Auth = 'Auth',
-  No_Auth = 'No_Auth',
+  NoAuth = 'NoAuth',
   Unknown = 'Unknown',
 }
 
@@ -30,12 +30,7 @@ export const ApiPaths = {
   Logout: 'logout',
 } as const;
 
-export const Contacts = {
-  City: 'Санкт-Петербург',
-  Address: 'Набережная реки Карповка, д 5П',
-} as const;
-
 export const ContactsLocation: Location = {
-  address: `${Contacts.City}, ${Contacts.Address}`,
+  address: 'Санкт-Петербург, Набережная реки Карповка, д 5П',
   coords: [59.968322, 30.317359],
 } as const;

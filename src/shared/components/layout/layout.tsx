@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { AuthStatus } from '../../api/const';
-import Header from '../header';
-import Footer from '../footer';
+import Header from '../header/header';
+import Footer from '../footer/footer';
 
 export type LayoutProps = {
   authStatus: AuthStatus;

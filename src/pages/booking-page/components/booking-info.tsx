@@ -1,6 +1,6 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import { BookingFormData } from '../';
-import FormInputError from '../../../shared/components/form-input-error';
+import { BookingFormData } from '../booking-page';
+import FormInputError from '../../../shared/components/form-input-error/form-input-error';
 
 type BookingInfoProps = {
   register: UseFormRegister<BookingFormData>;
@@ -8,13 +8,14 @@ type BookingInfoProps = {
   peopleMinMax: [number, number];
 };
 
-const contactPersonValidation = {
-  pattern: /^(?=.*[А-Яа-яЁёA-Za-z])[А-Яа-яЁёA-Za-z ]+$/,
-  minMaxLength: [1, 15],
-};
-const phoneValidation = {
-  pattern: /^(?:\+7|8)[\s-]?\d{3}[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/,
-};
+const ContactPersonValidation = {
+  Pattern: /^(?=.*[А-Яа-яЁёA-Za-z])[А-Яа-яЁёA-Za-z ]+$/,
+  MinMaxLength: [1, 15],
+} as const;
+
+const PhoneValidation = {
+  Pattern: /^(?:\+7|8)[\s-]?\d{3}[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/,
+} as const;
 
 const BookingInfo = ({ register, errors, peopleMinMax }: BookingInfoProps) => (
   <fieldset className="booking-form__section">
@@ -29,16 +30,16 @@ const BookingInfo = ({ register, errors, peopleMinMax }: BookingInfoProps) => (
         {...register('contactPerson', {
           required: 'Поле обязательно для заполнения',
           pattern: {
-            value: contactPersonValidation.pattern,
+            value: ContactPersonValidation.Pattern,
             message: 'Поле должно содержать только буквы и пробелы',
           },
           minLength: {
-            value: contactPersonValidation.minMaxLength[0],
-            message: `Поле должно содержать не менее ${contactPersonValidation.minMaxLength[0]} символов`,
+            value: ContactPersonValidation.MinMaxLength[0],
+            message: `Поле должно содержать не менее ${ContactPersonValidation.MinMaxLength[0]} символов`,
           },
           maxLength: {
-            value: contactPersonValidation.minMaxLength[1],
-            message: `Поле должно содержать не более ${contactPersonValidation.minMaxLength[1]} символов`,
+            value: ContactPersonValidation.MinMaxLength[1],
+            message: `Поле должно содержать не более ${ContactPersonValidation.MinMaxLength[1]} символов`,
           },
         })}
         placeholder="Имя"
@@ -55,7 +56,7 @@ const BookingInfo = ({ register, errors, peopleMinMax }: BookingInfoProps) => (
         {...register('phone', {
           required: 'Поле обязательно для заполнения',
           pattern: {
-            value: phoneValidation.pattern,
+            value: PhoneValidation.Pattern,
             message: 'Допустимые форматы: +7(8) XXX XXX XX XX, +7(8) XXX XXX-XX-XX, +7(8)XXXXXXXXX',
           },
         })}

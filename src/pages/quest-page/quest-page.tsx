@@ -2,7 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { AuthStatus, Paths } from '../../shared/api/const';
 import { getAuthStatus } from '../../shared/api/store/slices/user-slice/selectors';
 import { useAppDispatch, useAppSelector } from '../../shared/api/store/hooks';
-import Spinner from '../../shared/components/spinner';
+import Spinner from '../../shared/components/spinner/spinner';
 import { getIsQuestFetching, getQuest } from '../../shared/api/store/slices/quest-slice/selectors';
 import { fetchQuest } from '../../shared/api/store/api-actions';
 import { useEffect } from 'react';

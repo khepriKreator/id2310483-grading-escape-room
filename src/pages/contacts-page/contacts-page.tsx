@@ -1,4 +1,4 @@
-import Map from '../../shared/components/map';
+import Map from '../../shared/components/map/map';
 import { ContactsLocation } from '../../shared/api/const';
 
 const ContactsPage = () => (

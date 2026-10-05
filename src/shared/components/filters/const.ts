@@ -1,5 +1,11 @@
 import { filtersIcons } from './components/icons/index';
 
+export type FiltersOption = {
+  value: ThemeFilters | LevelFilters;
+  label: string;
+  icon?: JSX.Element;
+}
+
 export enum ThemeFilters {
   AllQuests = 'all_quests',
   Adventures = 'adventures',
@@ -14,12 +20,6 @@ export enum LevelFilters {
   Easy = 'easy',
   Medium = 'medium',
   Hard = 'hard',
-}
-
-export type FiltersOption = {
-  value: ThemeFilters | LevelFilters;
-  label: string;
-  icon?: JSX.Element;
 }
 
 export const ThemeFiltersOptions: FiltersOption[] = [

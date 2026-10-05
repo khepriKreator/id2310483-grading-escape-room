@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import Map from '../../shared/components/map';
+import Map from '../../shared/components/map/map';
 import BookingInfo from './components/booking-info';
 import BookingTimeOptions from './components/booking-time-options';
 import { QuestBooking } from '../../shared/api/models';
 import { useParams } from 'react-router-dom';
 import { useGetBookingInfoList } from './hooks/use-get-booking-info';
-import Spinner from '../../shared/components/spinner';
+import Spinner from '../../shared/components/spinner/spinner';
 import { useAppDispatch, useAppSelector } from '../../shared/api/store/hooks';
 import { useForm } from 'react-hook-form';
 import { getQuest } from '../../shared/api/store/slices/quest-slice/selectors';
@@ -64,7 +64,7 @@ const BookingPage = () => {
     return;
   }
 
-  const onPlaceChange = (placeId: string) => {
+  const handlePlaceChange = (placeId: string) => {
     const place = bookingInfoList.find((item) => item.id === placeId);
 
     if (place) {
@@ -116,7 +116,7 @@ const BookingPage = () => {
                 <Map
                   center={bookingInfoList[0].location}
                   bookingInfoList={bookingInfoList}
-                  onPlaceChange={onPlaceChange}
+                  onPlaceChange={handlePlaceChange}
                 />
               </div>
             </div>

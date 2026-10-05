@@ -3,14 +3,14 @@ import { QuestBooking } from '../../../shared/api/models';
 import { ApiPaths } from '../../../shared/api/const';
 import { api } from '../../../shared/api/services/api-service';
 
-export const useGetBookingInfo = (id?: string) => {
-  const [bookingInfo, setBookingInfo] = useState<QuestBooking[] | null>(null);
+export const useGetBookingInfoList = (id?: string) => {
+  const [bookingInfoList, setBookingInfoList] = useState<QuestBooking[] | null>(null);
   const [isFetching, setIsFetching] = useState<boolean>(false);
 
   useEffect(() => {
     let shouldUpdate = true;
 
-    const fetchBookingInfo = async () => {
+    const fetchBookingInfoList = async () => {
       if (!id) {
         return;
       }
@@ -26,13 +26,13 @@ export const useGetBookingInfo = (id?: string) => {
       );
 
       if (response.status === 200) {
-        setBookingInfo(response.data);
+        setBookingInfoList(response.data);
       }
 
       setIsFetching(false);
     };
 
-    fetchBookingInfo();
+    fetchBookingInfoList();
 
     return () => {
       shouldUpdate = false;
@@ -40,7 +40,7 @@ export const useGetBookingInfo = (id?: string) => {
   }, [id]);
 
   return {
-    bookingInfo,
+    bookingInfoList,
     isFetching,
   };
 };

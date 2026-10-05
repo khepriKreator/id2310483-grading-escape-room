@@ -5,7 +5,7 @@ import { QuestBooking, Location } from '../../../api/models';
 
 const useMarkers = (
   map: leaflet.Map | null,
-  bookingInfo?: QuestBooking[],
+  bookingInfoList?: QuestBooking[],
   contactsAddress?: Location,
   onPlaceChange?: (id: string) => void,
 ) => {
@@ -17,11 +17,11 @@ const useMarkers = (
 
   useEffect(
     () => {
-      if (bookingInfo) {
-        setActiveMarker(bookingInfo[0].id);
+      if (bookingInfoList) {
+        setActiveMarker(bookingInfoList[0].id);
       }
     },
-    [bookingInfo]
+    [bookingInfoList]
   );
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const useMarkers = (
 
     const markersCoords: Array<[number, number]> = [];
 
-    if (bookingInfo) {
+    if (bookingInfoList) {
       const handleActiveMarkerChange = (id: string) => {
         if (onPlaceChange) {
           onPlaceChange(id);
@@ -48,7 +48,7 @@ const useMarkers = (
         setActiveMarker(id);
       };
 
-      bookingInfo.forEach(({ id, location }) => {
+      bookingInfoList.forEach(({ id, location }) => {
         markersCoords.push(location.coords);
 
         const marker = leaflet.marker(
@@ -82,7 +82,7 @@ const useMarkers = (
       marker.addTo(markersLayer);
       markersRef.current.set(contactsAddress.address, marker);
     }
-  }, [map, bookingInfo, activeMarker, contactsAddress, onPlaceChange]);
+  }, [map, bookingInfoList, activeMarker, contactsAddress, onPlaceChange]);
 
   return markersRef;
 };

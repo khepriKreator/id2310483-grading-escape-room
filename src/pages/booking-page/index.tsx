@@ -4,7 +4,7 @@ import BookingInfo from './components/booking-info';
 import BookingTimeOptions from './components/booking-time-options';
 import { QuestBooking } from '../../shared/api/models';
 import { useParams } from 'react-router-dom';
-import { useGetBookingInfo } from './hooks/use-get-booking-info';
+import { useGetBookingInfoList } from './hooks/use-get-booking-info';
 import Spinner from '../../shared/components/spinner';
 import { useAppDispatch, useAppSelector } from '../../shared/api/store/hooks';
 import { useForm } from 'react-hook-form';
@@ -26,7 +26,7 @@ export type BookingFormData = {
 const BookingPage = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const { bookingInfo, isFetching } = useGetBookingInfo(id);
+  const { bookingInfoList, isFetching } = useGetBookingInfoList(id);
   const { handleBooking } = useBooking();
   const quest = useAppSelector(getQuest);
   const [selectedPlace, setSelectedPlace] = useState<QuestBooking | null>(null);
@@ -49,23 +49,23 @@ const BookingPage = () => {
         dispatch(fetchQuest(id));
       }
 
-      if (bookingInfo) {
-        setSelectedPlace(bookingInfo[0]);
+      if (bookingInfoList) {
+        setSelectedPlace(bookingInfoList[0]);
       }
     },
-    [dispatch, quest, id, bookingInfo]
+    [dispatch, quest, id, bookingInfoList]
   );
 
   if (isFetching) {
     return <Spinner />;
   }
 
-  if (!bookingInfo || !quest) {
+  if (!bookingInfoList || !quest) {
     return;
   }
 
   const onPlaceChange = (placeId: string) => {
-    const place = bookingInfo.find((item) => item.id === placeId);
+    const place = bookingInfoList.find((item) => item.id === placeId);
 
     if (place) {
       setSelectedPlace(place);
@@ -114,8 +114,8 @@ const BookingPage = () => {
             <div className="map">
               <div className="map__container">
                 <Map
-                  center={bookingInfo[0].location}
-                  bookingInfo={bookingInfo}
+                  center={bookingInfoList[0].location}
+                  bookingInfoList={bookingInfoList}
                   onPlaceChange={onPlaceChange}
                 />
               </div>

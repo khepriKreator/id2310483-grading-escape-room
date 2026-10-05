@@ -89,13 +89,14 @@ const BookingPage = () => {
         <picture>
           <source
             type="image/webp"
-            srcSet={quest.coverImgWebp}
+            srcSet={`${quest.previewImgWebp}, ${quest.coverImgWebp} 2x`}
           />
           <img
             src={quest.coverImg}
+            srcSet={`${quest.coverImg} 2x`}
             width="1366"
-            height="1959"
-            alt="обложка квеста"
+            height="768"
+            alt="превью квеста"
           />
         </picture>
       </div>

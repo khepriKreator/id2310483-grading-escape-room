@@ -17,6 +17,7 @@ import {
   fetchUserBookings,
 } from './shared/api/store/api-actions';
 import { getAuthStatus } from './shared/api/store/slices/user-slice/selectors';
+import { ToastContainer } from 'react-toastify';
 
 export const App = () => {
   const dispatch = useAppDispatch();
@@ -35,6 +36,7 @@ export const App = () => {
 
   return (
     <BrowserRouter>
+      <ToastContainer position={'top-center'} />
       <Routes>
         <Route path={Paths.MAIN} element={<Layout authStatus={authStatus} />}>
           <Route index element={<CatalogPage />} />

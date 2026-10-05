@@ -15,15 +15,15 @@ export const useGetBookingInfoList = (id?: string) => {
         return;
       }
 
-      if (!shouldUpdate) {
-        return;
-      }
-
       setIsFetching(true);
 
       const response = await api.get<QuestBooking[]>(
         `${ApiPaths.Quest}/${id}/booking`,
       );
+
+      if (!shouldUpdate) {
+        return;
+      }
 
       if (response.status === 200) {
         setBookingInfoList(response.data);

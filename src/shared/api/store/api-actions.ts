@@ -40,7 +40,7 @@ export const fetchUserBookings = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('quests/fetchMyBookings', async (_, {extra: api}) => {
+>('reservation/fetchUserBookings', async (_, {extra: api}) => {
   const response = await api.get<UserBooking[]>(ApiPaths.UserBooking);
   return response.data;
 });

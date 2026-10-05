@@ -20,8 +20,7 @@ const Map = ({ center, bookingInfoList, contactsAddress, onPlaceChange }: MapPro
   const activeMarkerRef = useRef<leaflet.Marker | null>(null);
 
   useEffect(() => {
-    let isMounted = true;
-    if (activeMarkerRef.current && isMounted) {
+    if (activeMarkerRef.current) {
       activeMarkerRef.current?.setIcon(DEFAULT_MARKER);
       activeMarkerRef.current = null;
     }
@@ -32,10 +31,6 @@ const Map = ({ center, bookingInfoList, contactsAddress, onPlaceChange }: MapPro
       marker?.setIcon(ACTIVE_MARKER);
       activeMarkerRef.current = marker ?? null;
     }
-
-    return () => {
-      isMounted = false;
-    };
   }, [markersRef, bookingInfoList]);
 
   return (

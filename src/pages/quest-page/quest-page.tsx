@@ -17,15 +17,9 @@ const QuestPage = () => {
 
   useEffect(
     () => {
-      let shouldUpdate = true;
-
-      if (id && shouldUpdate) {
+      if (id) {
         dispatch(fetchQuest(id));
       }
-
-      return () => {
-        shouldUpdate = false;
-      };
     },
     [id, dispatch]
   );

@@ -6,7 +6,7 @@ import Spinner from '../../shared/components/spinner/spinner';
 import { getIsQuestFetching, getQuest } from '../../shared/api/store/slices/quest-slice/selectors';
 import { fetchQuest } from '../../shared/api/store/api-actions';
 import { useEffect } from 'react';
-import { getThemeTranslation } from '../../utils/functions';
+import { getLevelTranslation, getThemeTranslation } from '../../utils/functions';
 
 const QuestPage = () => {
   const {id} = useParams();
@@ -68,7 +68,7 @@ const QuestPage = () => {
               <svg width="14" height="14" aria-hidden="true">
                 <use xlinkHref="#icon-level"></use>
               </svg>
-              {quest.level}
+              {getLevelTranslation(quest.level)}
             </li>
           </ul>
           <p className="quest-page__description">

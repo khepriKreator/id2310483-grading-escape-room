@@ -34,6 +34,17 @@ export const getLevelTranslation = (level: string): string => {
   }
 };
 
+export const getDateTranslation = (date: string): string => {
+  switch (date) {
+    case 'today':
+      return 'Сегодня';
+    case 'tomorrow':
+      return 'Завтра';
+    default:
+      return '';
+  }
+};
+
 export const getThemeTranslation = (theme: string): string => {
   switch (theme) {
     case 'adventures':
